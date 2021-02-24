@@ -1,6 +1,8 @@
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -12,6 +14,20 @@ public class Member {
     private String city;
     private String street;
     private String zipcode;
+
+    // 사실 Member 객체에서 Order에 대한 연관관계는 대개 필요 없다.
+    @OneToMany(mappedBy = "member") //연관관계의 주인은 Order객체의 member.. 연관관계의 주인은 외래키를 가진 객체를 주인으로 삼는다.
+    private List<Order> orders = new ArrayList<>();
+
+    ////////////// Getter Setter /////////////////
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public Long getId() {
         return id;
