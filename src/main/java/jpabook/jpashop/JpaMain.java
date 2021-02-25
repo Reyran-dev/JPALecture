@@ -29,17 +29,15 @@ public class JpaMain {
 //            order.addOrderItem(new OrderItem());
             
             // 2. 양방향 연관관계 Mapping 미적용시(이런식으로 개발해도 구현 자체는 문제가 없다.)
-            Order order = new Order();
-            em.persist(order);
+            Order order = new Order(); // 객체 생성
+            em.persist(order); // DB에 order 저장
 
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
+            OrderItem orderItem = new OrderItem(); // 객체 생성
+            orderItem.setOrder(order); // orderItem에 order 저장
 
-            em.persist(orderItem);
+            em.persist(orderItem); // DB에 orderItem 저장
 
-
-            //DB Update및 Insert 시점은 Commit 실행시 수행
-            tx.commit();
+            tx.commit(); //DB Update및 Insert 시점은 Commit 실행시 수행
         } catch (Exception e) {
             tx.rollback();
         } finally {
