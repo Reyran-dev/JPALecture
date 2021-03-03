@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
 
@@ -20,22 +21,32 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         // Transaction 실행
         tx.begin();
-        
+
         try {
             // JPA의 핵심은 단방향 연관관계 Mapping를 잘 설정하는 것이 Best
 
             // 1. 양방향 연관관계 Mapping 적용시(주로 개발상의 편의로 양방향 연관관계를 작성한다.)
 //            Order order = new Order();
 //            order.addOrderItem(new OrderItem());
-            
+//=========================================================================================
+
             // 2. 양방향 연관관계 Mapping 미적용시(이런식으로 개발해도 구현 자체는 문제가 없다.)
-            Order order = new Order(); // 객체 생성
-            em.persist(order); // DB에 order 저장
+//            Order order = new Order(); // 객체 생성
+//            em.persist(order); // DB에 order 저장
+//
+//            OrderItem orderItem = new OrderItem(); // 객체 생성
+//            orderItem.setOrder(order); // orderItem에 order 저장
+//
+//            em.persist(orderItem); // DB에 orderItem 저장
+//=========================================================================================
 
-            OrderItem orderItem = new OrderItem(); // 객체 생성
-            orderItem.setOrder(order); // orderItem에 order 저장
+            // 3. 상속관계와 Mapping
+            Book book = new Book();
 
-            em.persist(orderItem); // DB에 orderItem 저장
+            book.setName("JPA");
+            book.setAuthor("김영한");
+
+            em.persist(book);
 
             tx.commit(); //DB Update및 Insert 시점은 Commit 실행시 수행
         } catch (Exception e) {

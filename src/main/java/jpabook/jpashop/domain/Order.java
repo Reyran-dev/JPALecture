@@ -21,6 +21,10 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @OneToOne // Delivery와 1:1 Mapping
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
     // 주문서를 중심으로 어떤 Item이 필요한지 파악하기 위한 양방향 연관관계
     @OneToMany(mappedBy = "order") // 연관관계의 주인은 OrderItem의 order 객체
     private List<OrderItem> orderItems = new ArrayList<>();

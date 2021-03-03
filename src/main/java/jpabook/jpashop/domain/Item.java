@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 전략은 Single Table(Item과 Album, Book Movie가 합쳐진 Table 생성)
+@DiscriminatorColumn // Default => DTYPE
+public abstract class Item { // Item Table만 사용할 일이 없다 가정하고, 추상 Class로 작성
 
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")
@@ -16,6 +18,8 @@ public class Item {
     private int price;
     private int stockQuantity;
 
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
     ////////////// Getter Setter /////////////////
 
     public Long getId() {
