@@ -17,16 +17,20 @@ public class Order extends BaseEntity {
 //    @Column(name = "MEMBER_ID")
 //    private Long MemberId;
 
-    @ManyToOne // Order의 입장에서 Member와의 관계(한명의 회원이 여러개의 주문을 생성)
+    // Order의 입장에서 Member와의 관계(한명의 회원이 여러개의 주문을 생성)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToOne // Delivery와 1:1 Mapping
+    // Delivery와 1:1 Mapping
+    // cascade 사용으로 order를 저장할때 Delivery도 함께 저장
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
     // 주문서를 중심으로 어떤 Item이 필요한지 파악하기 위한 양방향 연관관계
-    @OneToMany(mappedBy = "order") // 연관관계의 주인은 OrderItem의 order 객체
+    // 연관관계의 주인은 OrderItem의 order 객체, cascade로 Order 생성시 OrderItem 함께 저장
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;

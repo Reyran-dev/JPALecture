@@ -12,14 +12,14 @@ public class OrderItem {
 //    @Column(name = "ORDER_ID")
 //    private Long orderID;
 
-    @ManyToOne // OrderItem 입장에서 Order는 다대일 관계
+    @ManyToOne(fetch = FetchType.LAZY) // OrderItem 입장에서 Order는 다대일 관계
     @JoinColumn(name = "ORDER_ID")
     private Order order;
 
 //    @Column(name = "ITEM_ID")
 //    private Long itemID;
 
-    @ManyToOne // OrderItem 입장에서 Item은 다대일 관계
+    @ManyToOne(fetch = FetchType.LAZY) // OrderItem 입장에서 Item은 다대일 관계
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
