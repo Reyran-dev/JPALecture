@@ -11,8 +11,9 @@ public class Category extends BaseEntity {
 
     private String name;
 
-    //Self로 양방향을 잡는다
-    @ManyToOne
+    // Self로 양방향을 잡는다
+    // Many to one과 One to One은 기본 fetch가 즉시로딩이므로 지연로딩으로 변경하는것을 권장
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ID")
     private Category parent;
 
