@@ -14,8 +14,8 @@ public class Order extends BaseEntity {
     private Long id;
 
     //외래키 값을 Mapping 해서 그대로 가져오지 말고 아래처럼 객체로 가져오자.
-//    @Column(name = "MEMBER_ID")
-//    private Long MemberId;
+    //@Column(name = "MEMBER_ID")
+    //private Long MemberId;
 
     // Order의 입장에서 Member와의 관계(한명의 회원이 여러개의 주문을 생성)
     @ManyToOne(fetch = FetchType.LAZY)
